@@ -10,7 +10,7 @@ if (isset($_GET['numero'])) {
     if (isset($_GET['numeri'])) {
         $numeri = array_merge(range(1, 9));
     }
-    if (isset($_GET['numeri'])) {
+    if (isset($_GET['simboli'])) {
         $simboli = [ "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
         "~", "*", "?", ":","\"",",","."];
     }
