@@ -1,0 +1,24 @@
+*{
+padding: 0;
+box-sizing: border-box;
+margin: 0;
+
+}
+
+.generator{
+    background-color: #001632;
+    width: 100%;
+}
+
+h1{
+    color:#7F8A99
+}
+h2{
+    color: #ffffff;
+}
+form{
+    background-color: #ffffff;
+}
+.col-7{
+    height: 400px;
+}
