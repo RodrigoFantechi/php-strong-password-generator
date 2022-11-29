@@ -5,18 +5,19 @@ if (isset($_GET['numero'])) {
 
     if (isset($_GET['lettere'])) {
         $lettere = array_merge(range('A', 'Z'), range('a', 'z'));
-        
     }
     if (isset($_GET['numeri'])) {
-        $numeri = array_merge(range(1, 9));
+        $numeri = range('1', '9');
     }
     if (isset($_GET['simboli'])) {
-        $simboli = [ "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
-        "~", "*", "?", ":","\"",",","."];
+        $simboli = [
+            "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
+            "~", "*", "?", ":", "\"", ",", "."
+        ];
     }
     $lunghezzaStringa = $_GET['numero'];
-   
-    $password = generatePassword($lunghezzaStringa, $lettere, $numeri, $simboli);
+    $ripeti = $_GET['radio'];
+    $password = generatePassword($lunghezzaStringa, $ripeti, $lettere, $numeri, $simboli);
     echo $password;
 } else {
     echo 'alert message';
@@ -25,21 +26,28 @@ if (isset($_GET['numero'])) {
 
 
 
-function generatePassword($lunghezzaStringa, ...$params)
+function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
 {
     $password = '';
     $array = [];
-
     foreach ($params as  $param) {
-        foreach ($param as $key => $element) {
+        foreach ($param as $element) {
             array_push($array, $element);
         }
     }
-
     for ($i = 0; $i < $lunghezzaStringa; $i++) {
-        $password = $password .$array[array_rand($array, 1)];
-    }
+        $appoggio = $array[array_rand($array, 1)];
 
+        if ($ripeti == 'si') {
+            $password = $password . $appoggio;
+        } else {
+            if (str_contains($password, $appoggio)) {
+                $i--;
+            } else {
+                 $password = $password . $appoggio;
+            }
+        }
+    }
     return $password;
 }
 
@@ -92,7 +100,7 @@ function generatePassword($lunghezzaStringa, ...$params)
                                 <label class="form-check-label" for="radio">Si</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio" id="radio2" value="0">
+                                <input class="form-check-input" type="radio" name="radio" id="radio2" value="no">
                                 <label class="form-check-label" for="radio2">No</label>
                             </div>
                             <div class="checkbox mt-3">
