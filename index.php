@@ -1,57 +1,5 @@
 <?php
-var_dump($_GET);
-
-if (isset($_GET['numero'])) {
-
-    if (isset($_GET['lettere'])) {
-        $lettere = array_merge(range('A', 'Z'), range('a', 'z'));
-    }
-    if (isset($_GET['numeri'])) {
-        $numeri = range('1', '9');
-    }
-    if (isset($_GET['simboli'])) {
-        $simboli = [
-            "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
-            "~", "*", "?", ":", "\"", ",", "."
-        ];
-    }
-    $lunghezzaStringa = $_GET['numero'];
-    $ripeti = $_GET['radio'];
-    $password = generatePassword($lunghezzaStringa, $ripeti, $lettere, $numeri, $simboli);
-    echo $password;
-} else {
-    echo 'alert message';
-}
-
-
-
-
-function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
-{
-    $password = '';
-    $array = [];
-    foreach ($params as  $param) {
-        foreach ($param as $element) {
-            array_push($array, $element);
-        }
-    }
-    for ($i = 0; $i < $lunghezzaStringa; $i++) {
-        $appoggio = $array[array_rand($array, 1)];
-
-        if ($ripeti == 'si') {
-            $password = $password . $appoggio;
-        } else {
-            if (str_contains($password, $appoggio)) {
-                $i--;
-            } else {
-                 $password = $password . $appoggio;
-            }
-        }
-    }
-    return $password;
-}
-
-
+include __DIR__ . '/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +22,8 @@ function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
                 <h1>Strong Password Generator</h1>
                 <h2>Genera una password sicura</h2>
             </div>
-            <div class="alert alert-primary text-start" role="alert">
-                <strong>Alert Heading</strong>
+            <div class="alert <?= $alertColor ?> text-start" role="alert">
+                <strong><?= $alertMessage ?></strong>
             </div>
 
             <form action="index.php" method="get">
@@ -85,6 +33,9 @@ function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
                             <div class="paragraphs">
                                 <p class="py-3">Lunghezza password:</p>
                                 <p class="py-3">Consenti ripetizioni di uno o più caratteri:</p>
+                            </div>
+                            <div class="results py-5 px-3" style="background-color: lightblue;">
+                                <h4><?= $password ?></h4>
                             </div>
                             <div class="buttons">
                                 <button type="submit" class="btn btn-primary">Invia</button>
