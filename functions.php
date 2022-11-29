@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_GET['numero'])) {
+if (isset($_GET['numero']) && !empty($_GET['numero']) ) {
 
     if (isset($_GET['lettere'])) {
         $lettere = array_merge(range('A', 'Z'), range('a', 'z'));

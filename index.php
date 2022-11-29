@@ -34,7 +34,7 @@ include __DIR__ . '/functions.php';
                                 <p class="py-3">Lunghezza password:</p>
                                 <p class="py-3">Consenti ripetizioni di uno o più caratteri:</p>
                             </div>
-                            <div class="results py-5 px-3" style="background-color: lightblue;">
+                            <div class="results py-5 px-3" style="background-color: lightblue; overflow-x: auto; ">
                                 <h4><?= $password ?></h4>
                             </div>
                             <div class="buttons">
