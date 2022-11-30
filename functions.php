@@ -23,6 +23,9 @@ if (isset($_GET['numero']) && !empty($_GET['numero'])) {
     if ($password  == 'Inserimento non valido') {
         $alertMessage = 'Inserimento non valido';
         $alertColor = 'alert-danger';
+    } elseif ($password  == 'Numero di massimo di caratteri = 100') {
+        $alertMessage = 'Numero di massimo di caratteri = 100';
+        $alertColor = 'alert-danger';
     }
 } else {
     $alertMessage = 'Inserimento non valido';
@@ -32,31 +35,37 @@ if (isset($_GET['numero']) && !empty($_GET['numero'])) {
 
 function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
 {
-    $password = '';
-    $array = [];
+    if ($lunghezzaStringa > 100) {
+        return 'Numero di massimo di caratteri = 100';
+    } else {
 
-    foreach ($params as  $param) {
-        foreach ($param as $element) {
-            array_push($array, $element);
-        }
-    }
 
-    for ($i = 0; $i < $lunghezzaStringa; $i++) {
-        $appoggio = $array[array_rand($array, 1)];
+        $password = '';
+        $array = [];
 
-        if ($ripeti == 'si') {
-            $password = $password . $appoggio;
-        } else {
-            if (str_contains($password, $appoggio)) {
-                if (count($array) <= $lunghezzaStringa) {
-                    return 'Inserimento non valido';
-                } else {
-                    $i--;
-                }
-            } else {
-                $password = $password . $appoggio;
+        foreach ($params as  $param) {
+            foreach ($param as $element) {
+                array_push($array, $element);
             }
         }
+
+        for ($i = 0; $i < $lunghezzaStringa; $i++) {
+            $appoggio = $array[array_rand($array, 1)];
+
+            if ($ripeti == 'si') {
+                $password = $password . $appoggio;
+            } else {
+                if (str_contains($password, $appoggio)) {
+                    if (count($array) <= $lunghezzaStringa) {
+                        return 'Inserimento non valido';
+                    } else {
+                        $i--;
+                    }
+                } else {
+                    $password = $password . $appoggio;
+                }
+            }
+        }
+        return $password;
     }
-    return $password;
 }
