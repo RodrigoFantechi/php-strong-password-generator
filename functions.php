@@ -14,35 +14,46 @@ if (isset($_GET['numero']) && !empty($_GET['numero']) ) {
             "~", "*", "?", ":", "\"", ",", "."
         ];
     }
-    $lunghezzaStringa = $_GET['numero'];
-    $ripeti = $_GET['radio'];
+    
     $alertMessage = 'Inserimento  valido';
     $alertColor = 'alert-success';
+    $lunghezzaStringa = $_GET['numero'];
+    $ripeti = $_GET['radio'];
     $password = generatePassword($lunghezzaStringa, $ripeti, $lettere, $numeri, $simboli);
+    if ($password  == 'inserimento non valido'){
+        $alertMessage = 'Inserimento non valido';
+        $alertColor = 'alert-danger';  
+    }
 } else {
     $alertMessage = 'Inserimento non valido';
     $alertColor = 'alert-danger';
 }
 
 
-
 function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
 {
     $password = '';
     $array = [];
+
     foreach ($params as  $param) {
         foreach ($param as $element) {
             array_push($array, $element);
         }
     }
+
     for ($i = 0; $i < $lunghezzaStringa; $i++) {
         $appoggio = $array[array_rand($array, 1)];
 
         if ($ripeti == 'si') {
             $password = $password . $appoggio;
+            
         } else {
             if (str_contains($password, $appoggio)) {
-                $i--;
+                if(count($array) <= $lunghezzaStringa){
+                    return 'inserimento non valido';
+                }else{
+                    $i--;   
+                }
             } else {
                  $password = $password . $appoggio;
             }
@@ -50,5 +61,3 @@ function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
     }
     return $password;
 }
-
-?>
