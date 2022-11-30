@@ -20,7 +20,7 @@ if (isset($_GET['numero']) && !empty($_GET['numero']) ) {
     $lunghezzaStringa = $_GET['numero'];
     $ripeti = $_GET['radio'];
     $password = generatePassword($lunghezzaStringa, $ripeti, $lettere, $numeri, $simboli);
-    if ($password  == 'inserimento non valido'){
+    if ($password  == 'Inserimento non valido'){
         $alertMessage = 'Inserimento non valido';
         $alertColor = 'alert-danger';  
     }
@@ -50,7 +50,7 @@ function generatePassword($lunghezzaStringa, $ripeti,  ...$params)
         } else {
             if (str_contains($password, $appoggio)) {
                 if(count($array) <= $lunghezzaStringa){
-                    return 'inserimento non valido';
+                    return 'Inserimento non valido';
                 }else{
                     $i--;   
                 }
