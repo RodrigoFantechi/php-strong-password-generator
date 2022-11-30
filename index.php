@@ -29,7 +29,7 @@ include __DIR__ . '/functions.php';
             <form action="index.php" method="get">
                 <div class="container">
                     <div class="row text-start">
-                        <div class="col-7  px-5 py-3 d-flex flex-column justify-content-between">
+                        <div class="col-12 col-sm-7  px-5 py-3 d-flex flex-column justify-content-between">
                             <div class="paragraphs">
                                 <p class="py-3">Lunghezza password:</p>
                                 <p class="py-3">Consenti ripetizioni di uno o più caratteri:</p>
@@ -37,12 +37,12 @@ include __DIR__ . '/functions.php';
                             <div class="results py-5 px-3" style="background-color: lightblue; overflow-x: auto; ">
                                 <h4><?= $password ?></h4>
                             </div>
-                            <div class="buttons">
+                            <div class="buttons mt-3">
                                 <button type="submit" class="btn btn-primary">Invia</button>
                                 <button type="submit" class="btn btn-secondary">Annulla</button>
                             </div>
                         </div>
-                        <div class="col-5 px-5 py-3">
+                        <div class="col-12 col-sm-5 px-5 py-3">
                             <div class="mb-3 py-3">
                                 <input type="number" class="form-control w-50" name="numero" id="numero" aria-describedby="helpId" placeholder="Inserisci Numero">
                             </div>
